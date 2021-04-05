@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 
 export class MyService {
-    private baseURL: string = "http://todo-app-adam2k21.herokuapp.com";
+    private baseURL: string = "https://todo-app-adam2k21.herokuapp.com";
 
     constructor(private http: HttpClient) {}
 
