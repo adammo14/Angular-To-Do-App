@@ -28,9 +28,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/Bootstrap/bootstrap.min.css"
             ],
-            "scripts": []
+            "scripts": [
+                "src/assets/Bootstrap/bootstrap.bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {
