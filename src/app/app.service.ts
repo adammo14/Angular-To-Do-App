@@ -1,19 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-
 @Injectable()
 
 export class MyService {
-    private SERVER_URL: string = "http://localhost:7000/api";
+    private baseURL: string = "http://testing-stuff-2k21.herokuapp.com";
+    private localBaseURL: string = "http://localhost:7000";
 
-    constructor(private http: HttpClient) {
-
-    }
+    constructor(private http: HttpClient) {}
 
     getToDos() {
-        return this.http.get(`${this.SERVER_URL}/todo`);
+        return this.http.get(`${this.localBaseURL}/api/todo`);
     }
 }
