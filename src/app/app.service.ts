@@ -5,11 +5,10 @@ import { HttpClient } from '@angular/common/http';
 
 export class MyService {
     private baseURL: string = "http://testing-stuff-2k21.herokuapp.com";
-    private localBaseURL: string = "http://localhost:7000";
 
     constructor(private http: HttpClient) {}
 
     getToDos() {
-        return this.http.get(`${this.localBaseURL}/api/todo`);
+        return this.http.get(`${this.baseURL}/api/todo`);
     }
 }
