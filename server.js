@@ -44,6 +44,7 @@ const ToDoSchema = new mongoose.Schema({
 const ToDo = mongoose.model('Todo', ToDoSchema);
 
 // Endpoints
+// Add TODO
 app.post('/api/toDo', async (req, res) => {
   try {
       const newToDo = await ToDo.create(req.body)
@@ -62,6 +63,7 @@ app.post('/api/toDo', async (req, res) => {
   }
 });
 
+// Fetch TODOS
 app.get('/api/toDo', async (req, res) => {
   try {
       const todos = await ToDo.find();

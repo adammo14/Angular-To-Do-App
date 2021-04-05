@@ -2,6 +2,13 @@
     <div class="row">
         <h1>To Do App</h1>
 
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Add a new item" [(ngModel)]="newToDo">
+            <div class="input-group-btn">
+                <button type="submit" class="btn btn-primary" (click)="addNewItem(newToDo)">Submit</button>
+            </div>
+        </div>
+
         <div *ngIf="todos">
             <div class="card" *ngFor="let item of todos.data.todos">
                 <div class="card-body">
