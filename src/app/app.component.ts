@@ -8,27 +8,42 @@ import { MyService } from './app.service';
 })
 export class AppComponent {
     title = 'phoebus-to-do-app';
-    todos:any;
-    newToDo: String;
+
+    newTodo: string;
+    todos: any;
+    todoObj: any;
 
     constructor(private myService: MyService){
 
     }
 
     ngOnInit() {
+        this.getAllTodos();
+    }
+
+    getAllTodos() {
         this.myService.getToDo().subscribe(data => this.todos = data);
     }
 
-    getToDo() {
-        this.myService.getToDo().subscribe(data => this.todos = data);
-    }
-
-    addNewItem(newToDo: String) {
-        console.log(`${newToDo} was added!`)
-        const item = {
+    addNewItem(event) {
+        this.todoObj = {
             id: this.todos.results + 1,
-            title: newToDo
+            title: this.newTodo,
+            isDone: false
         }
-        this.myService.addToDo(item).subscribe(data => this.todos = data);
+        this.myService.addToDo(this.todoObj).subscribe(data => {
+            console.log('todo added!')
+        });
+        this.newTodo = '';
+        event.preventDefault();
+        this.getAllTodos();
+    }
+
+    updateToDo(id: Number) {
+        console.log(id)
+    }
+
+    deleteToDo(id: Number) {
+
     }
 }

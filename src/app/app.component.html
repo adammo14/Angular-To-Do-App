@@ -3,16 +3,20 @@
         <h1>To Do App</h1>
 
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Add a new item" [(ngModel)]="newToDo">
-            <div class="input-group-btn">
-                <button type="submit" class="btn btn-primary" (click)="addNewItem(newToDo)">Submit</button>
-            </div>
+            <form (submit)="addNewItem($event)">
+                <input type="text" class="form-control" placeholder="Add a new item" [(ngModel)]="newTodo" (keyup.enter)="newTodo=''" name="newTodo">
+                <div class="input-group-btn">
+                    <button type="submit" class="btn btn-primary" [disabled]="newTodo===''">Submit</button>
+                </div>
+            </form>
         </div>
 
         <div *ngIf="todos">
-            <div class="card" *ngFor="let item of todos.data.todos">
+            <div class="card" *ngFor="let item of todos.data">
                 <div class="card-body">
                     {{ item.title }}
+                    <i class="fad fa-edit"></i>
+                    <i class="fad fa-trash-alt"></i>
                 </div>
             </div>
         </div>

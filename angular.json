@@ -30,10 +30,12 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.scss",
-              "src/assets/Bootstrap/bootstrap.min.css"
+              "src/assets/Bootstrap/bootstrap.min.css",
+              "src/assets/FontAwesome/css/all.min.css"
             ],
             "scripts": [
-              "src/assets/Bootstrap/bootstrap.bundle.min.js"
+              "src/assets/Bootstrap/bootstrap.bundle.min.js",
+              "src/assets/FontAwesome/js/all.min.js"
             ]
           },
           "configurations": {
