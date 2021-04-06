@@ -4,8 +4,8 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 
 export class MyService {
-    //private baseURL: string = "https://todo-app-adam2k21.herokuapp.com";
-    private baseURL: string = "http://localhost:3000";
+    private baseURL: string = "https://todo-app-adam2k21.herokuapp.com";
+    //private baseURL: string = "http://localhost:3000";
 
     constructor(private http: HttpClient) {}
 
