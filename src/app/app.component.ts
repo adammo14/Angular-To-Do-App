@@ -12,6 +12,7 @@ export class AppComponent {
     newTodo: string;
     todos: any;
     todoObj: any;
+    yo: any;
 
     constructor(private myService: MyService){
 
@@ -22,17 +23,20 @@ export class AppComponent {
     }
 
     getAllTodos() {
-        this.myService.getToDo().subscribe(data => this.todos = data);
+        this.myService.getToDo().subscribe(res => {
+            this.yo = res;
+            this.todos = this.yo.data;
+        });
     }
 
     addNewItem(event) {
         this.todoObj = {
-            id: this.todos.results + 1,
+            id: 0 + this.todos.length + 1,
             title: this.newTodo,
             isDone: false
         }
         this.myService.addToDo(this.todoObj).subscribe(data => {
-            console.log('todo added!')
+            console.log('todo added!', this.todoObj)
         });
         this.newTodo = '';
         event.preventDefault();
@@ -43,7 +47,13 @@ export class AppComponent {
         console.log(id)
     }
 
-    deleteToDo(id: Number) {
+    deleteToDo(id) {
+        console.log('i ran delete!', id)
+        this.myService.deleteToDo(id);
+        this.getAllTodos();
+    }
 
+    trackByIndex(index: number, obj: any): any {
+        return index;
     }
 }

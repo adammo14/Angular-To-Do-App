@@ -23,7 +23,9 @@ export class MyService {
     //
 
     // DELETE a todo
-    deleteToDo(id: Number) {
-        return this.http.delete(`${this.baseURL}/api/todo/${id}`);
+    deleteToDo(id) {
+        return this.http.delete(`${this.baseURL}/api/todo/${id}`).subscribe(data => {
+            console.log('done!')
+        });
     }
 }

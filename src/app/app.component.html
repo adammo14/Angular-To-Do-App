@@ -3,8 +3,11 @@
         <h1>To Do App</h1>
 
         <div class="input-group">
-            <form (submit)="addNewItem($event)">
-                <input type="text" class="form-control" placeholder="Add a new item" [(ngModel)]="newTodo" (keyup.enter)="newTodo=''" name="newTodo">
+            <form class="form-inline" (submit)="addNewItem($event)">
+                <div class="form-group mb-2">
+                    <input type="text" class="form-control" placeholder="Add a new item" [(ngModel)]="newTodo" (keyup.enter)="newTodo=''" name="newTodo">
+                </div>
+
                 <div class="input-group-btn">
                     <button type="submit" class="btn btn-primary" [disabled]="newTodo===''">Submit</button>
                 </div>
@@ -12,11 +15,21 @@
         </div>
 
         <div *ngIf="todos">
-            <div class="card" *ngFor="let item of todos.data">
-                <div class="card-body">
-                    {{ item.title }}
-                    <i class="fad fa-edit"></i>
-                    <i class="fad fa-trash-alt"></i>
+            <div class="card mb-1" *ngFor="let item of todos; let index = index; trackBy:trackByIndex;">
+                <div class="card-body d-flex justify-content-between align-items-center" [ngClass]="{done: todos[index].isDone === true}">
+                    <div class="main d-inline-flex align-items-center">
+                        <div class="round">
+                            <input type="checkbox" id="checkbox{{item.id}}" [checked]="item.isDone" (change)="item.isDone = !item.isDone">
+                            <label for="checkbox{{item.id}}"></label>
+                        </div>
+
+                        <p class="fs-2 mb-0 ms-3">{{ item.title }}</p>
+                    </div>
+                    <div class="controls d-inline-flex">
+                        <a class="remove fs-2 ms-3" href="#" (click)="deleteToDo(item._id)">
+                            <i class="fad fa-trash-alt"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

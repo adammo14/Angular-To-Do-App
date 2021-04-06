@@ -108,21 +108,31 @@ app.get('/api/todo', async (req, res) => {
 
 
 // Delete TODOS
-app.delete('/api/todo', async (req, res) => {
-    try {
-        await User.findByIdAndDelete(req.params.id);
-
-        res.status(204).json({
-            status: 'success',
-            data: null
-        });
-    } catch (err) {
-        res.status(404).json({
-            status: 'fail',
-            message: err
-        });
-    }
+app.delete('/api/todo/:id', (req, res) => {
+    ToDo.findByIdAndDelete(req.params.id, (err, res) => {
+        if(err) {
+            console.log(err)
+        } else {
+            console.log('deleted!')
+        }
+    });
 });
+
+// app.delete('/api/todo/:id', async (req, res) => {
+//     console.log(req.params.id)
+//     try {
+//         ToDo.findByIdAndDelete(req.params.id);
+
+//         res.status(200).json({
+//             status: 'success'
+//         })
+//     } catch (err) {
+//         res.status(404).json({
+//             status: 'fail',
+//             message: err
+//         });
+//     }
+// });
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
