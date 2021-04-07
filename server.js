@@ -23,7 +23,6 @@ mongoose.connect(DB, {
 });
 
 // Uncomment for deployment
-
 function requireHTTPS(req, res, next) {
     // The 'x-forwarded-proto' check is for Heroku
     if (!req.secure && req.get('x-forwarded-proto') !== 'https') {
@@ -48,7 +47,8 @@ const ToDoSchema = new mongoose.Schema({
     },
     title: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     isDone: {
         type: Boolean
