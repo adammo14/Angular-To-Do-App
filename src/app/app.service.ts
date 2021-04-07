@@ -11,34 +11,33 @@ export class MyService {
 
     // GET all todos
     getToDo() {
+        console.log('get All started')
         return this.http.get(`${this.baseURL}/api/todo`);
     }
 
     // POST a todo
     addToDo(newItem: Object) {
-        return this.http.post(`${this.baseURL}/api/todo`, newItem).subscribe(data => {
-            console.log('done!')
-        });
+        console.log('post one started')
+        return this.http.post(`${this.baseURL}/api/todo`, newItem);
     }
 
     // PUT
     updateTitle(id: String, title: String) {
-        return this.http.put(`${this.baseURL}/api/todo/${id}`, {title: title}).subscribe(data => {
-            console.log('done!')
-        });
+        console.log('update title started')
+        return this.http.put(`${this.baseURL}/api/todo/${id}`, {title: title})
     }
 
     // PUT
     toggleIsDone(id: String, isDone: Boolean) {
-        return this.http.put(`${this.baseURL}/api/todo/isDone/${id}`, {isDone: isDone}).subscribe(data => {
-            console.log('done!')
-        });
+        console.log('toggle isDone started')
+        return this.http.put(`${this.baseURL}/api/todo/isDone/${id}`, {isDone: isDone});
     }
 
     // DELETE a todo
-    deleteToDo(id) {
+    deleteToDo(id: String) {
+        console.log('delete started')
         return this.http.delete(`${this.baseURL}/api/todo/${id}`).subscribe(data => {
-            console.log('done!')
+            console.log('delete done!')
         });
     }
 }

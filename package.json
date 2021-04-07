@@ -53,5 +53,6 @@
   "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.1.",
   "main": "karma.conf.js",
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "sideEffects": false
 }

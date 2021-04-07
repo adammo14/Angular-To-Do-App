@@ -9,7 +9,7 @@ import { MyService } from './app.service';
 export class AppComponent {
     title = 'phoebus-to-do-app';
 
-    newTodo: string;
+    newTodo: string = '';
     todos: any;
     todoObj: any;
     yo: any;
@@ -24,38 +24,44 @@ export class AppComponent {
 
     getAllTodos() {
         this.myService.getToDo().subscribe(res => {
+            console.log('get All done!');
             this.yo = res;
             this.todos = this.yo.data;
         });
     }
 
-    addNewItem(event) {
+    addNewItem(event: Event) {
         this.todoObj = {
             id: 0 + this.todos.length + 1,
             title: this.newTodo,
             isDone: false,
             editing: false
         }
-        this.myService.addToDo(this.todoObj);
-        this.newTodo = '';
-        event.preventDefault();
-        this.getAllTodos();
+        this.myService.addToDo(this.todoObj).subscribe(() => {
+            console.log('post one done!');
+            this.newTodo = '';
+            event.preventDefault();
+            this.getAllTodos();
+        });
     }
 
-    updateTitle(event, userId, title) {
-        this.myService.updateTitle(userId, title);
-        this.getAllTodos();
+    updateTitle(event: Event, userId: String, title: String) {
+        this.myService.updateTitle(userId, title).subscribe(() => {
+            console.log('update title done!');
+            this.getAllTodos();
+        });
     }
 
-    toggleIsDone(event, userId, isDone) {
+    toggleIsDone(event: Event, userId: String, isDone: Boolean) {
         isDone = !isDone;
-        this.myService.toggleIsDone(userId, isDone);
-        this.getAllTodos();
+        this.myService.toggleIsDone(userId, isDone).subscribe(() => {
+            console.log('toggle isDone done!');
+            this.getAllTodos();
+        });
     }
 
-    deleteToDo(id) {
-        console.log('i ran delete!', id)
-        this.myService.deleteToDo(id);
+    deleteToDo(userId: String) {
+        this.myService.deleteToDo(userId);
         this.getAllTodos();
     }
 

@@ -1,42 +1,44 @@
-<div class="container">
-    <div class="row">
-        <h1>To Do App</h1>
+<section id="main">
+    <div class="container">
+        <div class="row">
+            <h1 class="fs-1">To Do App</h1>
 
-        <div class="input-group">
-            <form class="form-inline" (submit)="addNewItem($event)">
-                <div class="form-group mb-2">
-                    <input type="text" class="form-control" placeholder="Add a new item" [(ngModel)]="newTodo" (keyup.enter)="newTodo=''" name="newTodo">
-                </div>
-
-                <div class="input-group-btn">
-                    <button type="submit" class="btn btn-primary" [disabled]="newTodo===''">Submit</button>
-                </div>
-            </form>
-        </div>
-
-        <div *ngIf="todos">
-            <div class="card mb-1" *ngFor="let item of todos; let index = index; trackBy:trackByIndex;">
-                <div class="card-body d-flex justify-content-between align-items-center" [ngClass]="{done: todos[index].isDone === true}">
-                    <div class="main d-inline-flex align-items-center">
-                        <div class="round">
-                            <input type="checkbox" id="checkbox{{item.id}}" [checked]="item.isDone" (change)="toggleIsDone($event, item._id, item.isDone)" required> <!--item.isDone = !item.isDone; -->
-                            <label for="checkbox{{item.id}}"></label>
-                        </div>
-
-                        <p class="fs-2 mb-0 ms-3" *ngIf="!item.editing" (dblclick)="item.editing = !item.editing">{{ item.title }}</p>
-                        <form (submit)="updateTitle($event, item._id, item.title)" *ngIf="item.editing">
-                            <input class="fs-2 mb-0 ms-3" type="text" name="newTitle" [(ngModel)]="item.title" required>
-                        </form>
-
+            <div class="input-group">
+                <form class="d-inline-flex w-100" (submit)="addNewItem($event)">
+                    <div class="form-group mb-4 w-100">
+                        <input type="text" class="form-control fs-2" placeholder="Add a new item" [(ngModel)]="newTodo" (keyup.enter)="newTodo=''" name="newTodo">
                     </div>
-                    <div class="controls d-inline-flex">
-                        <a class="remove fs-2 ms-3" href="#" (click)="deleteToDo(item._id)">
-                            <i class="fad fa-trash-alt"></i>
-                        </a>
+
+                    <div class="input-group-btn">
+                        <button type="submit" class="btn btn-primary" [disabled]="newTodo===''">Submit</button>
+                    </div>
+                </form>
+            </div>
+
+            <div *ngIf="todos">
+                <div class="card mb-1" *ngFor="let item of todos; let index = index; trackBy:trackByIndex;">
+                    <div class="card-body d-flex justify-content-between align-items-center" [ngClass]="{done: todos[index].isDone === true}">
+                        <div class="main d-inline-flex align-items-center">
+                            <div class="round">
+                                <input class="fs-2" type="checkbox" id="checkbox{{item.id}}" [checked]="item.isDone" (change)="toggleIsDone($event, item._id, item.isDone)" required> <!--item.isDone = !item.isDone; -->
+                                <label for="checkbox{{item.id}}"></label>
+                            </div>
+
+                            <p class="fs-2 mb-0 ms-3" *ngIf="!item.editing" (click)="item.editing = !item.editing">{{ item.title }}</p>
+                            <form (submit)="updateTitle($event, item._id, item.title)" *ngIf="item.editing">
+                                <input class="fs-2 mb-0 ms-3" type="text" name="newTitle" [(ngModel)]="item.title" required>
+                            </form>
+
+                        </div>
+                        <div class="controls d-inline-flex">
+                            <a class="remove fs-2 ms-3 text-danger" href="#" (click)="deleteToDo(item._id)">
+                                <i class="fad fa-trash-alt"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
+            <small class="text-right" *ngIf="todos">Total of: {{todos.length}} tasks.</small>
         </div>
-        <small class="text-right" *ngIf="todos">Total of: {{todos.length}} tasks.</small>
     </div>
-</div>
+</section>
