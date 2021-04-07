@@ -4,9 +4,9 @@
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Screenshot
 
-(https://user-images.githubusercontent.com/15087423/113868269-68e36e00-97a7-11eb-9412-8b289032580c.png)
+![Image of ToDoApp](https://user-images.githubusercontent.com/15087423/113868269-68e36e00-97a7-11eb-9412-8b289032580c.png)
 
 
 ## Build
