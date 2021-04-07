@@ -16,12 +16,13 @@ export class MyService {
 
     // POST a todo
     addToDo(newItem: Object) {
-        return this.http.post(`${this.baseURL}/api/todo`, newItem);
+        return this.http.post(`${this.baseURL}/api/todo`, newItem).subscribe(data => {
+            console.log('done!')
+        });
     }
 
     // PUT
     updateTitle(id: String, title: String) {
-        console.log('update service', id, title)
         return this.http.put(`${this.baseURL}/api/todo/${id}`, {title: title}).subscribe(data => {
             console.log('done!')
         });

@@ -32,7 +32,7 @@ function requireHTTPS(req, res, next) {
     next();
 }
 
-// app.use(requireHTTPS);
+app.use(requireHTTPS);
 app.use(express.static('./dist/angular-heroku'));
 
 app.get('/', (req, res) =>

@@ -36,9 +36,7 @@ export class AppComponent {
             isDone: false,
             editing: false
         }
-        this.myService.addToDo(this.todoObj).subscribe(data => {
-            console.log('todo added!', this.todoObj)
-        });
+        this.myService.addToDo(this.todoObj);
         this.newTodo = '';
         event.preventDefault();
         this.getAllTodos();
