@@ -33,7 +33,8 @@ export class AppComponent {
         this.todoObj = {
             id: 0 + this.todos.length + 1,
             title: this.newTodo,
-            isDone: false
+            isDone: false,
+            editing: false
         }
         this.myService.addToDo(this.todoObj).subscribe(data => {
             console.log('todo added!', this.todoObj)
@@ -43,8 +44,15 @@ export class AppComponent {
         this.getAllTodos();
     }
 
-    updateToDo(id: Number) {
-        console.log(id)
+    updateTitle(event, userId, title) {
+        this.myService.updateTitle(userId, title);
+        this.getAllTodos();
+    }
+
+    toggleIsDone(event, userId, isDone) {
+        isDone = !isDone;
+        this.myService.toggleIsDone(userId, isDone);
+        this.getAllTodos();
     }
 
     deleteToDo(id) {

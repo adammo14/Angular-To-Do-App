@@ -20,7 +20,19 @@ export class MyService {
     }
 
     // PUT
-    //
+    updateTitle(id: String, title: String) {
+        console.log('update service', id, title)
+        return this.http.put(`${this.baseURL}/api/todo/${id}`, {title: title}).subscribe(data => {
+            console.log('done!')
+        });
+    }
+
+    // PUT
+    toggleIsDone(id: String, isDone: Boolean) {
+        return this.http.put(`${this.baseURL}/api/todo/isDone/${id}`, {isDone: isDone}).subscribe(data => {
+            console.log('done!')
+        });
+    }
 
     // DELETE a todo
     deleteToDo(id) {

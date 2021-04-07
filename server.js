@@ -1,7 +1,5 @@
 const express = require('express');
-const { MongooseDocument } = require('mongoose');
 const mongoose = require('mongoose');
-//const bodyParser = require('body-parser')
 require('dotenv').config({
     path: __dirname + '/.env'
 })
@@ -26,13 +24,13 @@ mongoose.connect(DB, {
 
 // Uncomment for deployment
 
-// function requireHTTPS(req, res, next) {
-//     // The 'x-forwarded-proto' check is for Heroku
-//     if (!req.secure && req.get('x-forwarded-proto') !== 'https') {
-//         return res.redirect('https://' + req.get('host') + req.url);
-//     }
-//     next();
-// }
+function requireHTTPS(req, res, next) {
+    // The 'x-forwarded-proto' check is for Heroku
+    if (!req.secure && req.get('x-forwarded-proto') !== 'https') {
+        return res.redirect('https://' + req.get('host') + req.url);
+    }
+    next();
+}
 
 // app.use(requireHTTPS);
 app.use(express.static('./dist/angular-heroku'));
@@ -54,11 +52,10 @@ const ToDoSchema = new mongoose.Schema({
     },
     isDone: {
         type: Boolean
+    },
+    editing: {
+        type: Boolean
     }
-    // date: {
-    //     type: Date,
-    //     required: true
-    // }
 });
 
 const ToDo = mongoose.model('Todo', ToDoSchema);
@@ -101,10 +98,35 @@ app.get('/api/todo', async (req, res) => {
         });
     }
 
-})
+});
 
-// Update TODOS
-// here
+// Update Title
+app.put('/api/todo/:id', async (req, res) => {
+    try {
+        const todo = await ToDo.findOneAndUpdate({_id: req.params.id}, req.body, { new: true });
+
+        res.status(200).json({
+            status: 'success',
+            data: todo
+        });
+    } catch (err) {
+        console.log('bad thing!', err)
+    }
+});
+
+// Update isDone
+app.put('/api/todo/isDone/:id', async (req, res) => {
+    try {
+        const todo = await ToDo.findOneAndUpdate({_id: req.params.id}, req.body, { new: true });
+
+        res.status(200).json({
+            status: 'success',
+            data: todo
+        });
+    } catch (err) {
+        console.log('bad thing!', err)
+    }
+});
 
 
 // Delete TODOS
@@ -117,22 +139,6 @@ app.delete('/api/todo/:id', (req, res) => {
         }
     });
 });
-
-// app.delete('/api/todo/:id', async (req, res) => {
-//     console.log(req.params.id)
-//     try {
-//         ToDo.findByIdAndDelete(req.params.id);
-
-//         res.status(200).json({
-//             status: 'success'
-//         })
-//     } catch (err) {
-//         res.status(404).json({
-//             status: 'fail',
-//             message: err
-//         });
-//     }
-// });
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
