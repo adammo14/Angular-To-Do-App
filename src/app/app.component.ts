@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+
 import { MyService } from './app.service';
 
 @Component({
@@ -8,14 +10,18 @@ import { MyService } from './app.service';
 })
 export class AppComponent {
     title = 'phoebus-to-do-app';
-
+    myGroup: FormGroup;
     newTodo: string = '';
-    todos: any;
     todoObj: any;
+    todos: any;
     yo: any;
 
-    constructor(private myService: MyService){
-
+    constructor(
+        public myService: MyService
+    ){
+        this.myGroup = new FormGroup({
+            newTodo: new FormControl()
+        });
     }
 
     ngOnInit() {
@@ -33,13 +39,13 @@ export class AppComponent {
     addNewItem(event: Event) {
         this.todoObj = {
             id: 0 + this.todos.length + 1,
-            title: this.newTodo,
+            title: this.myGroup.controls.newTodo.value,
             isDone: false,
             editing: false
         }
         this.myService.addToDo(this.todoObj).subscribe(() => {
             console.log('post one done!');
-            this.newTodo = '';
+            this.myGroup.controls.newTodo.setValue('');
             event.preventDefault();
             this.getAllTodos();
         });
