@@ -12,7 +12,6 @@ app.use(express.urlencoded({
 }));
 
 const DB = process.env.DATABASE;
-//const DB = process.env.DATABASE.replace('<DATABASE_PASSWORD>', process.env.DATABASE_PASSWORD);
 
 // Connect to database
 mongoose.connect(DB, {
